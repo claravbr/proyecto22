@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/claravbr/proyecto22.git"
+    "url": "git+https://github.com/DonRoscon/Procesos-Proyecto22.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/claravbr/proyecto22/issues"
+    "url": "https://github.com/DonRoscon/Procesos-Proyecto22/issues"
   },
-  "homepage": "https://github.com/claravbr/proyecto22#readme"
+  "homepage": "https://github.com/DonRoscon/Procesos-Proyecto22#readme"
 }
