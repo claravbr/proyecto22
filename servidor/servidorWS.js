@@ -42,7 +42,7 @@ function ServidorWS() {
 			socket.on("abandonarPartida", function (nick, codigo) {
                 let res = { nick:nick, codigo:codigo};
                 cli.enviarATodosEnPartida(io, codigo, "jugadorAbandona", res);
-                juego.abandonarPartida(nick, codigo);
+                juego.jugadorAbandonaPartida(nick, codigo);
 			});
 
 			socket.on("colocarBarco", function (nick, nombre, x, y) {
@@ -79,7 +79,7 @@ function ServidorWS() {
 					let codigoStr = partida.codigo.toString();
 					let res = { impacto: estado, x: x, y: y, turno: partida.turno.nick };
 
-					cli.enviarATodosEnPartida(io, codigoStr, "jugadordispara", res);
+					cli.enviarATodosEnPartida(io, codigoStr, "disparo", res);
 
 					if (partida.esFinal()) {
 						cli.enviarATodosEnPartida(io, partida.codigo.toString(), "finPartida", res);
