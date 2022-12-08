@@ -29,7 +29,7 @@ function ClienteRest() {
 			}
 			else {
 				console.log("Usuario " + data.nick + " no está activo.");
-				iu.mostrarAgregarUsuario()
+				iu.mostrarAgregarUsuario();
 			}
 		});
 	}
@@ -41,6 +41,7 @@ function ClienteRest() {
 			if (data.codigo != -1) {
 				console.log("Usuario " + nick + " crea partida codigo: " + data.codigo)
 				iu.mostrarCodigo(data.codigo);
+				$.cookie("nick", data.nick);
 			}
 			else {
 				console.log("No se ha podido crear partida")
@@ -76,12 +77,19 @@ function ClienteRest() {
 			iu.mostrarListaDePartidasDisponibles(lista);
 		});
 	}
-	this.usuarioSale = function () {
+	this.salirUsuario = function () {
 		let nick = this.nick;
 		$.getJSON("/salir/" + nick, function () {
 			$.removeCookie("nick");
 			iu.comprobarCookie();
-		})
+		});
 	}
+
+	this.abandonarPartida = function (codigo) {
+        let nick = this.nick;
+        $.getJSON("/abandonarPartida/" + nick + "/" + codigo, function (data) {       
+            iu.mostrarHome();
+        });
+    }
 }
 
