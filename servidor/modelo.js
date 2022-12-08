@@ -4,7 +4,7 @@ function Juego() {
 	this.partidas = {};
 	this.usuarios = {}; //array asociativo
 	this.cad = new cad.Cad(); // capa de acceso a datos
-	this.test = test
+	//this.test = test;
 
 	this.agregarUsuario = function (nick) {
 		let res = { "nick": -1 };
@@ -12,11 +12,11 @@ function Juego() {
 			this.usuarios[nick] = new Usuario(nick, this);
 			res = { "nick": nick };
 			console.log("Nuevo usuario: " + nick);
-			if (!this.test) {
+			/*if (!this.test) {
 				this.insertarLog({ 'operacion': 'agregarUsuario', 'nick': nick, 'fecha': Date() }, function () {
 					console.log('Registro insertado');
 				});
-			}
+			}*/
 		}
 		return res;
 	}
@@ -28,11 +28,11 @@ function Juego() {
 			this.finalizarPartida(nick);
 			this.eliminarUsuario(nick);
 
-			if (!this.test) {
+			/*if (!this.test) {
 				this.insertarLog({ "operacion": "usuarioSale", "nick": nick, "fecha": Date() }, function () {
 					console.log("Registro de salida de usuario");
 				});
-			}
+			}*/
 		}
 	}
 	this.jugadorCreaPartida = function (nick) {
@@ -63,11 +63,11 @@ function Juego() {
 	this.crearPartida = function (usr) {
 		let codigo = Date.now();
 		console.log("Usuario " + usr.nick + " crea partida " + codigo);
-		if (!this.test) {
+		/*if (!this.test) {
 			this.insertarLog({ "operacion": "crearPartida", "propietario": usr.nick, "fecha": Date() }, function () {
 				console.log("Registro de partida creada");
 			});
-		}
+		}*/
 		this.partidas[codigo] = new Partida(codigo, usr);
 		return codigo;
 	}
@@ -75,12 +75,11 @@ function Juego() {
 		let res = -1;
 		if (this.partidas[codigo]) {
 			res = this.partidas[codigo].agregarJugador(usr);
-
-			if (!this.test) {
+			/*if (!this.test) {
 				this.insertarLog({ "operacion": "unirseAPartida", "codigo": codigo, "nick": usr.nick, "fecha": Date() }, function () {
 					console.log("Registro de unirse a partida");
 				});
-			}
+			}*/
 		}
 		else {
 			console.log("La partida no existe");
@@ -118,13 +117,11 @@ function Juego() {
 		if (this.partidas[codigo]) {
 			this.finalizarPartida(usr);
 			console.log("Abandonar partida");
-
-			if (!this.test) {
+			/*if (!this.test) {
 				this.insertarLog({ "operacion": "abandonarPartida", "codigo": codigo, "fecha": Date() }, function () {
 					console.log("Registro de las partidas abandonadas");
 				});
-			}
-
+			}*/
 		}
 		else {
 			console.log("La partida no existe");
@@ -368,7 +365,7 @@ function Tablero(size) {
 			return false;
 		}
 		for (i = 0; i < tam; i++) {
-			let contiene = this.casillas[i+x][y].contiene;
+			let contiene = this.casillas[i + x][y].contiene;
 			if (!contiene.esAgua()) {
 				return false;
 			}
