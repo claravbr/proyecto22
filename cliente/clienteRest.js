@@ -12,8 +12,7 @@ function ClienteRest() {
 				$.cookie("nick", data.nick);
 				cws.conectar();
 				iu.mostrarHome();//iu.mostrarHome(data.nick)
-			}
-			else {
+			} else {
 				console.log("No se ha podido registrar el usuario")
 				iu.mostrarModal("El nick ya está en uso");
 				iu.mostrarAgregarUsuario();
@@ -81,7 +80,7 @@ function ClienteRest() {
 		let nick = this.nick;
 		$.getJSON("/salir/" + nick, function () {
 			$.removeCookie("nick");
-			iu.comprobarCookie();
+			iu.mostrarComprobarCookie();
 		});
 	}
 
