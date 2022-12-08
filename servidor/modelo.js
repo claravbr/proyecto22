@@ -367,8 +367,8 @@ function Tablero(size) {
 		if (x + tam > this.size) {
 			return false;
 		}
-		for (i = x; i < tam; i++) {
-			let contiene = this.casillas[i][y].contiene;
+		for (i = 0; i < tam; i++) {
+			let contiene = this.casillas[i+x][y].contiene;
 			if (!contiene.esAgua()) {
 				return false;
 			}
