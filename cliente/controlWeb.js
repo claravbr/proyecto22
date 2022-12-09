@@ -48,10 +48,7 @@ function ControlWeb() {
         cadena = cadena + '<div class="col">';
         cadena = cadena + '<div class="card bg-light" style=" margin: auto auto" id="card-bienvenido">';
         cadena = cadena + '<div class="card-body">';
-        cadena = cadena + '<h1>Bienvenide ';
-        rest.nick = $.cookie("nick"); 
-        cadena = cadena + rest.nick;
-        cadena = cadena + "" + '</h1>';
+        cadena = cadena + '<h1>Bienvenid@!</h1>';
         cadena = cadena + '<div id="codigo"></div>';
         cadena = cadena + '<button id="btnCC" class="btn btn-primary mb-2 mr-sm-2" style="margin-left:15px">Salir</button>';
         cadena = cadena + '</div></div>';
@@ -106,7 +103,7 @@ function ControlWeb() {
         cadena = cadena + '<div class="col-12">'
         cadena = cadena + '<div class="card bg-light" style=" margin: auto auto" id="card-bienvenido">';
         cadena = cadena + '<div class="card-body">';
-        cadena = cadena + '<button id="btnAP" class="btn btn-primary">Abandonar partida</button>';
+        cadena = cadena + '<button id="btnAP" class="btn btn-primary">Abandonar</button>';
         cadena = cadena + '</div></div>';
         cadena = cadena + '</div></div>';
 

@@ -1,6 +1,10 @@
+let cad = require('./cad.js');
+
 function Juego() {
 	this.partidas = [];
 	this.usuarios = {};  //array asociativo [clave][objeto]
+	this.cad = new cad.Cad(); // capa de acceso a datos
+	//this.test = test;
 
 	this.agregarUsuario = function (nick) {
 		let res = { "nick": -1 };
