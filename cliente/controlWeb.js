@@ -10,7 +10,8 @@ function ControlWeb() {
         cadena = cadena + '<div class="card-body">';
         cadena = cadena + '<h2>Inicio de sesión</h2>';
         cadena = cadena + '<input type="text" class="form-control mb-2 mr-sm-2" id="usr" placeholder="Introduce tu nick (max 6 letras)" required>';
-        cadena = cadena + '<button id="btnAU" class="btn btn-primary mb-2 mr-sm-2">Entrar</button>';
+        cadena = cadena + '<button id="btnAU" class="btn btn-primary mb-2 mr-sm-2">Iniciar Sesión</button>';
+        cadena = cadena + '<a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>';
         cadena = cadena + '<div id="nota"></div>';
         cadena = cadena + '</div></div>'
 
@@ -49,6 +50,8 @@ function ControlWeb() {
         cadena = cadena + '<div class="card bg-light" style=" margin: auto auto" id="card-bienvenido">';
         cadena = cadena + '<div class="card-body">';
         cadena = cadena + '<h1>Bienvenid@!</h1>';
+        rest.nick = $.cookie("nick"); 
+        cadena = cadena + rest.nick;
         cadena = cadena + '<div id="codigo"></div>';
         cadena = cadena + '<button id="btnCC" class="btn btn-primary mb-2 mr-sm-2" style="margin-left:15px">Salir</button>';
         cadena = cadena + '</div></div>';
