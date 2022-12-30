@@ -11,7 +11,10 @@ function ControlWeb() {
         cadena = cadena + '<h2>Inicio de sesión</h2>';
         cadena = cadena + '<input type="text" class="form-control mb-2 mr-sm-2" id="usr" placeholder="Introduce tu nick (max 6 letras)" required>';
         cadena = cadena + '<button id="btnAU" class="btn btn-primary mb-2 mr-sm-2">Iniciar Sesión</button>';
-        cadena = cadena + '<a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>';
+        cadena = cadena + '<br><br>';
+        cadena = cadena + '<p>Otros métodos de inicio de sesión:</p>';
+        cadena = cadena + '<a href="/auth/google"><img src="cliente/img/icons8-logo-de-google-96.svg" alt="" width="50" height="50"></a>';
+        cadena = cadena + '<a href="/auth/twitter"><img src="cliente/img/icons8-twitter-96.svg" alt="" width="50" height="50"></a>';
         cadena = cadena + '<div id="nota"></div>';
         cadena = cadena + '</div></div>'
 
