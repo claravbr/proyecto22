@@ -130,8 +130,10 @@ function Usuario(nick, juego) {
 		this.tableroRival = new Tablero(dim);
 	}
 	this.inicializarFlota = function () {
+		this.flota["b1"] = new Barco ("b1", 1)
 		this.flota["b2"] = new Barco("b2", 2);
 		this.flota["b4"] = new Barco("b4", 4);
+		this.flota["b3"] = new Barco("b3", 3);
 	}
 	this.colocarBarco = function (nombre, x, y) {
 		let barco = this.flota[nombre];
@@ -140,8 +142,6 @@ function Usuario(nick, juego) {
 		} else {
 			console.log("En la fase " + this.partida.fase + " no se pueden colocar barcos.")
 		}
-
-
 	}
 
 	this.todosDesplegados = function () {
