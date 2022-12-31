@@ -40,6 +40,7 @@ function ClienteWS() {
                 console.log("El usuario " + rest.nick + " crea la partida de codigo: " + data.codigo);
                 iu.mostrarCodigo(data.codigo);
                 iu.mostrarAbandonarPartida(data.codigo);
+                iu.mostrarEsperando();
                 cli.codigo = data.codigo;
             }
             else {
@@ -115,8 +116,8 @@ function ClienteWS() {
             console.log("Aun no se han desplegado todos los barcos.")
         });
         this.socket.on("esperandoRival", function () {
-            console.log("Esperando al rival");
-            iu.mostrarModal("Esperando al rival");
+            console.log("Esperando al rival...");
+            iu.mostrarEsperando();
         })
         this.socket.on("disparo", function (res) {
             if (res.turno == rest.nick) {
