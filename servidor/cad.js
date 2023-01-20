@@ -52,13 +52,13 @@ function Cad() {
                         cad.logs = col;
                     }
                 });
-
             } else {
                 console.log("No se pudo conectar con MongoDB Atlas");
             }
         });
     }
-    //this.conectar();
+    
+    this.conectar();
 }
 
 module.exports.Cad = Cad;
