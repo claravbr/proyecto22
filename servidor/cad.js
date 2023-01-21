@@ -4,10 +4,11 @@ var ObjectID = require("mongodb").ObjectID;
 function Cad() {
     this.logs;
     this.usuarios;
+    this.partidas;
 
     //logs
     this.insertarLog = function (log, callback) {
-        insertar(this.logs, partida, callback);
+        insertar(this.logs, log, callback);
     }
 
     this.obtenerLogs = function (callback) {
@@ -15,9 +16,22 @@ function Cad() {
     }
 
     //Partidas
-    //Usuarios
+    this.insertarPartida = function (partida, callback) {
+        insertar(this.partidas, partida, callback);
+    }
 
-    //Productos
+    this.obtenerPartidas = function (callback) {
+        obtenerTodos(this.partidas, callback);
+    }
+
+    //Usuarios
+    this.insertarUsuario = function (usuario, callback) {
+        insertar(this.usuarios, usuario, callback);
+    }
+
+    this.obtenerUsuarios = function (callback) {
+        obtenerTodos(this.usuarios, callback);
+    }
 
     function insertar(coleccion, elemento, callback) {
         coleccion.insertOne(elemento, function (err, result) {

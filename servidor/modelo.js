@@ -4,12 +4,14 @@ function Juego() {
 	this.partidas = [];
 	this.usuarios = {};  //array asociativo [clave][objeto]
 	this.cad = new cad.Cad(); // capa de acceso a datos
-	//this.test = test;
 
 	this.agregarUsuario = function (nick) {
 		let res = { "nick": -1 };
 		if (!this.usuarios[nick]) {
-			this.usuarios[nick] = new Usuario(nick, this)
+			this.usuarios[nick] = new Usuario(nick, this);
+			this.insertarLog({ "operacion": "inicioSesion", "usuario": nick, "fecha": Date() }, function () {
+				console.log("Registro de log (iniciar sesion) insertado");
+			});
 			res = { "nick": nick };
 			console.log("Nuevo usuario: " + nick);
 		}
@@ -18,6 +20,19 @@ function Juego() {
 	this.eliminarUsuario = function (nick) {
 		delete this.usuarios[nick];
 		console.log("El usuario " + nick + " ha salido del juego.")
+	}
+	this.usuarioSale = function (nick) {
+		if (this.usuarios[nick]) {
+			codigo = this.finalizarPartida(nick);
+			//console.log(codigo,"modelo-usuarioSale")
+			this.eliminarUsuario(nick);
+			this.insertarLog({ "operacion": "finSesion", "usuario": nick, "fecha": Date() }, function () {
+				console.log("Registro de log (salir) insertado");
+			});
+			if (codigo) {
+				return codigo
+			}
+		}
 	}
 	this.eliminarPartida = function (index) {
 		console.log("Partida " + this.partidas[index].codigo + " eliminada.");
@@ -36,18 +51,20 @@ function Juego() {
 	this.jugadorCreaPartida = function (nick) {
 		let usr = this.usuarios[nick];
 		let res = { "codigo": -1 };
-		let codigo;
 
 		if (usr) {
-			codigo = usr.crearPartida();
+			let codigo = usr.crearPartida();
 			res = { "codigo": codigo };
 		}
-
 		return res;
 	}
 
 	this.crearPartida = function (user) {
 		let codigo = Date.now();
+		console.log("Usuario " + user.nick + " crea partida " + codigo);
+		this.insertarLog({ "operacion": "crearPartida", "propietario": user.nick, "codigo": codigo, "fecha": Date() }, function () {
+			console.log("Registro de log (crear partida) insertado");
+		});
 		this.partidas[codigo] = new Partida(codigo, user);
 		return codigo;
 	}
@@ -56,6 +73,10 @@ function Juego() {
 		let res = -1;
 		if (this.partidas[codigo]) {
 			res = this.partidas[codigo].agregarJugador(user);
+
+			this.insertarLog({ "operacion": "unirsePartida", "usuario": user.nick, "codigoPartida": codigo, "fecha": Date() }, function () {
+				console.log("Registro de log(unirse a partida) insertado");
+			});
 		} else {
 			console.log("La partida no existe");
 		}
@@ -65,10 +86,9 @@ function Juego() {
 	this.jugadorSeUneAPartida = function (nick, codigo) {
 		let usr = this.usuarios[nick];
 		let res = { "codigo": -1 };
-		let valor;
 
 		if (usr) {
-			valor = this.unirseAPartida(codigo, usr);
+			let valor = this.unirseAPartida(codigo, usr);
 			res = { "codigo": valor };
 		}
 		return res;
@@ -86,11 +106,13 @@ function Juego() {
 		return res;
 	}
 	this.abandonarPartida = function (nick, codigo) {
+		this.insertarLog({ "operacion": "abandonarPartida", "usuario": nick, "codigo": codigo, "fecha": Date() }, function () {
+			console.log("Registro de log(abandonar) insertado");
+		});
 		return this.eliminarPartida(codigo);
 	}
 
 	this.obtenerPartidas = function () {
-
 		let lista = [];
 		for (let key in this.partidas) {
 			lista.push({ "codigo": key, "owner": this.partidas[key].owner.nick });
@@ -99,7 +121,6 @@ function Juego() {
 	}
 
 	this.obtenerPartidasDisponibles = function () {
-
 		let lista = [];
 		for (let key in this.partidas) {
 			if (this.partidas[key].jugadores.length < 2) {
@@ -107,6 +128,16 @@ function Juego() {
 			}
 		}
 		return lista;
+	}
+
+	this.obtenerLogs = function (callback) {
+		this.cad.obtenerLogs(callback);
+	}
+
+	this.insertarLog = function (log, callback) {
+		if (!this.test) {
+			this.cad.insertarLog(log, callback)
+		}
 	}
 }
 
@@ -130,7 +161,7 @@ function Usuario(nick, juego) {
 		this.tableroRival = new Tablero(dim);
 	}
 	this.inicializarFlota = function () {
-		this.flota["b1"] = new Barco ("b1", 1)
+		this.flota["b1"] = new Barco("b1", 1)
 		this.flota["b2"] = new Barco("b2", 2);
 		this.flota["b4"] = new Barco("b4", 4);
 		this.flota["b3"] = new Barco("b3", 3);
@@ -336,7 +367,6 @@ function Tablero(size) {
 			}
 		}
 		return true;
-
 	}
 	this.meDisparan = function (x, y) {
 		return this.casillas[x][y].contiene.meDisparan(this, x, y);
@@ -388,7 +418,6 @@ function Barco(nombre, tam) {
 	}
 	this.obtenerEstado = function () {
 		return this.estado;
-
 	}
 }
 
