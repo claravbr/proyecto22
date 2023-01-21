@@ -112,6 +112,11 @@ function Juego() {
 		return this.eliminarPartida(codigo);
 	}
 
+	/*this.pausarPartida = function (codigo){
+		let partida = this.obtenerPartida(codigo);
+		partida.cambiaFase('pausa');
+	}*/
+
 	this.obtenerPartidas = function () {
 		let lista = [];
 		for (let key in this.partidas) {
@@ -135,9 +140,7 @@ function Juego() {
 	}
 
 	this.insertarLog = function (log, callback) {
-		if (!this.test) {
 			this.cad.insertarLog(log, callback)
-		}
 	}
 }
 
@@ -258,11 +261,17 @@ function Partida(codigo, user) {
 	this.esFinal = function () {
 		return this.fase == "final";
 	}
+	/*this.esPausa = function (){
+		return this.fase == "pausa";
+	}*/
 	this.comprobarFase = function () {
 		if (!this.hayHueco()) {
 			this.fase = 'desplegando';
 		}
 	}
+	/*this.cambiaFase = function(fase){
+		this.fase = fase;
+	}*/
 
 	this.hayHueco = function () {
 		return (this.jugadores.length < this.maxJugadores);
@@ -397,11 +406,13 @@ function Barco(nombre, tam) {
 	this.desplegado = false;
 	this.estado = "intacto";
 	this.disparos = 0;
+	this.casillas = {};
 
 	this.esAgua = function () {
 		return false
 	}
-	this.meDisparan = function (tablero, x, y) {
+	
+	/*this.meDisparan = function (tablero, x, y) {
 		this.disparos++;
 
 		if (this.disparos < this.tam) {
@@ -415,10 +426,48 @@ function Barco(nombre, tam) {
 		tablero.ponerAgua(x, y);
 
 		return this.obtenerEstado();
+	}*/
+
+	this.meDisparan = function (tablero, x, y){
+			this.estado = "tocado";
+			this.casillas[x] = "tocado";
+			console.log("Tocado");
+		
+		if (this.comprobarCasillas()){
+			this.estado = "hundido";
+			console.log("Hundido");
+		}
+
+		return this.estado;
 	}
+
+	this.posicion = function (x, y) {
+        this.x = x;
+        this.y = y;
+        this.desplegado = true;
+		this.iniCasillas();
+    }
+
 	this.obtenerEstado = function () {
 		return this.estado;
 	}
+
+	this.comprobarCasillas = function () {
+        for (i = 0; i < this.tam; i++) {
+            if (this.casillas[this.x + i] == 'intacto') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+	this.iniCasillas = function () { //Ha cambiado todo esto al ser un array asociativo
+        for (i = 0; i < this.tam; i++) {
+            this.casillas[i+this.x] = "intacto"; //cambiado
+        }
+    }
+
+	//this.iniCasillas(tam)	Lo inicializamos en posicion ahora
 }
 
 function Agua() {
@@ -445,6 +494,9 @@ function Jugando() {
 function Final() {
 	this.nombre = "final";
 }
+/*function Pausa(){
+	this.nombre = "pausa";
+}*/
 
 
 
