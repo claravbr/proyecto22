@@ -10,6 +10,7 @@
     "mongodb": "^3.6.3",
     "passport": "^0.5.3",
     "passport-google-oauth20": "^2.0.0",
+    "passport-twitter": "^1.0.4",
     "socket.io": "^4.5.4"
   },
   "scripts": {
@@ -25,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/claravbr/proyecto22/issues"
   },
-  "homepage": "https://github.com/claravbr/proyecto22#readme"
+  "homepage": "https://github.com/claravbr/proyecto22#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.29.2"
+  }
 }
