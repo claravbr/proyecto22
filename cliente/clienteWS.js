@@ -85,10 +85,8 @@ function ClienteWS() {
             //Pintar gris cuando colocamos
             if (res.colocado==true) {
                 let barco = tablero.flota[res.barco];
-                console.log("llegara hasta aqui? barcoColocado en cws");
                 tablero.puedesColocarBarco(barco, res.x, res.y, res.desplegados);
                 console.log("El Barco " + res.barco + " es colocado en la posición (" + res.x + "," + res.y + ")");
-                iu.mostrarModal("El Barco " + res.barco + " es colocado en la posición (" + res.x + "," + res.y + ")");
             }
 
 
@@ -140,7 +138,6 @@ function ClienteWS() {
                     break;
             }
             console.log("Disparo de " + res.atacante + ": " + estado);
-            iu.mostrarModal("Disparo de " + res.atacante + ": " + estado + "<br/>Turno de: " + res.turno);
         });
 
         this.socket.on("noEsTuTurno", function (res) {
