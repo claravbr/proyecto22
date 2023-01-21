@@ -43,9 +43,18 @@ app.get("/auth/google",passport.authenticate('google', { scope: ['profile','emai
 app.get('/google/callback', 
   passport.authenticate('google', { failureRedirect: '/fallo' }),
   function(req, res) {
-    // Successful authentication, redirect home.
+    // Successful authentication, redirect.
     res.redirect('/good');
 });
+
+/*app.get('/auth/twitter', passport.authenticate('twitter'));
+
+app.get('/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/fallo' }),
+  function(req, res) {
+    // Successful authentication, redirect.
+    res.redirect('/goodtwitter');
+  });*/
 
 app.get("/good", function(request,response){
   var nick=request.user.emails[0].value;
@@ -56,12 +65,18 @@ app.get("/good", function(request,response){
   response.redirect('/');
 });
 
+/*app.get("/goodtwitter", function(request,response){
+  var nick=request.user;
+  if (nick){
+    juego.agregarUsuario(nick);
+  }
+  response.cookie('nick',nick);
+  response.redirect('/');
+});*/
+
 app.get("/fallo",function(request,response){
   response.send({nick:"nook"})
 });
-
-// estrategia local
-//"/auth/twitter"
 
 app.get("/comprobarUsuario/:nick", function(request, response){
 	let nick= request.params.nick;

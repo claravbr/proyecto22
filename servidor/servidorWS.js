@@ -97,7 +97,7 @@ function ServidorWS() {
                         let codigoStr = user.partida.codigo.toString();
                         cli.enviarATodosEnPartida(io, codigoStr, "aJugar", res);
 
-                        console.log("Barcos deplegados. Comienza a atacar: " + res.turno);
+                        console.log("Barcos desplegados. Comienza a atacar: " + res.turno);
 
                     }
 
