@@ -1,4 +1,3 @@
-
 function ClienteWS() {
 
     this.socket = io();
@@ -32,6 +31,10 @@ function ClienteWS() {
         this.socket.emit("salir", rest.nick);
     }
 
+    /*this.pausarPartida = function (codigo){
+        this.socket.emit("pausarPartida", rest.nick, codigo);
+    }*/
+
     //gestion de peticiones
     this.servidorWS = function () {
         let cli = this;
@@ -56,6 +59,7 @@ function ClienteWS() {
                 console.log("El usuario " + rest.nick + " se ha unido a la partida de codigo: " + data.codigo);
                 iu.mostrarCodigo(data.codigo);
                 iu.mostrarAbandonarPartida(data.codigo);
+                //iu.mostrarPausarPartida(data.codigo);
                 cli.codigo = data.codigo;
             }
             else {
@@ -80,6 +84,10 @@ function ClienteWS() {
             tablero.mostrarTablero(false);
             console.log("El Usuario " + res.nick + " ha abandonado la partida " + res.codigo);
             iu.mostrarModal("El Usuario " + res.nick + " ha abandonado la partida ");
+        });
+        this.socket.on("partidaPausada", function(res){
+            console.log("El usuario " + res.nick + " ha pausado la partida." + res.codigo);
+            iu.mostrarModal("El usuario " + res.nick + " ha pausado la partida.");
         });
         this.socket.on("barcoColocado", function (res) {
             //Pintar gris cuando colocamos
@@ -138,6 +146,11 @@ function ClienteWS() {
                     break;
             }
             console.log("Disparo de " + res.atacante + ": " + estado);
+        });
+
+        this.socket.on("cambioDeTurno", function(res){
+            console.log("Cambio de turno, le toca a " + res.atacado);
+            iu.mostrarModal("Cambio de turno, le toca a " + res.atacado);
         });
 
         this.socket.on("noEsTuTurno", function (res) {
