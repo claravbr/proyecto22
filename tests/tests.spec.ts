@@ -90,8 +90,6 @@ test('end-to-end', async ({ browser }) => {
   await luispage.locator('div:nth-child(2) > .grid > div:nth-child(34)').click();
 
   //Luis ganador
-  await pepepage.getByRole('button', { name: 'Cerrar' }).click();
-  await luispage.getByRole('button', { name: 'Cerrar' }).click();
 });
 
 
