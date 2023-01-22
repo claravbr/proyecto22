@@ -166,3 +166,15 @@ test('abandona-usuario', async ({ browser }) => {
   await mariapage.getByRole('button', { name: 'Cerrar' }).click();
   await luisapage.getByRole('button', { name: 'Cerrar' }).click();
 });
+
+test('login-google', async ({ browser }) => {
+  const Context = await browser.newContext();
+
+  //navegador para cada jugador
+  const page = await Context.newPage();
+  // Inicio de sesión
+  await page.goto('http://localhost:3000/');
+
+  await page.getByRole('link', { name: 'Google' }).click();
+
+});
