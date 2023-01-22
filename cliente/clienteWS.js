@@ -170,5 +170,8 @@ function ClienteWS() {
             iu.finPartida();
         });
 
+        this.socket.on("hasGanado", function () {
+            iu.mostrarModalGanador("Fin de la partida. ¡Has ganado!");
+        });
     }
 }

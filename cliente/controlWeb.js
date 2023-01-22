@@ -187,5 +187,14 @@ function ControlWeb() {
         $('#miModal').modal("show");
     }
 
+    this.mostrarModalGanador = function (msg) {
+        $('#mM').remove();
+        $("#mGC").remove();
+        var cadena = "<p id='mM'>" + msg + "</p>";
+        var cadena = cadena + '<img src="https://media0.giphy.com/media/2gtoSIzdrSMFO/giphy.gif" alt="Gif ganador" width="450">';
+        $('#contenidoModal').append(cadena);
+        $('#miModal').modal("show");
+    }
+
 
 }

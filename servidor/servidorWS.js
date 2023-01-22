@@ -137,6 +137,7 @@ function ServidorWS() {
 
                         if (partida.esFinal()) {
                             let res = { turno: turno.nick };
+                            cli.enviarAlRemitente(socket, "hasGanado", res);
                             cli.enviarATodosEnPartida(io, codigoStr, "finPartida", res);
                         }
 
