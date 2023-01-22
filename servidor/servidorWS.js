@@ -51,16 +51,6 @@ function ServidorWS() {
                 cli.enviarATodosEnPartida(io, codigoStr, "userAbandona", res);
                 juego.abandonarPartida(nick, codigo);
             });
-      
-            /*socket.on("pausarPartida", function (codigo) {
-                let res = juego.obtenerPartida(codigo);
-                let codigoStr = res.codigo.toString();
-                let partida = juego.obtenerPartida(res.codigo);
-
-                res = { nick: nick, codigo: partida.codigo };
-                cli.enviarATodosEnPartida(io, codigoStr, "partidaPausada", res);
-                juego.pausarPartida(codigo);
-            });*/
 
             socket.on("colocarBarco", function (nick, nombre, x, y) {
 

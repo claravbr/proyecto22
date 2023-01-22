@@ -132,7 +132,6 @@ function ControlWeb() {
             $("#codigo").remove();
             cws.abandonarPartida(codigo);
         });
-
     }
 
     this.mostrarListaDePartidas = function (lista) {

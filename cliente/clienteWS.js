@@ -31,10 +31,6 @@ function ClienteWS() {
         this.socket.emit("salir", rest.nick);
     }
 
-    /*this.pausarPartida = function (codigo){
-        this.socket.emit("pausarPartida", rest.nick, codigo);
-    }*/
-
     //gestion de peticiones
     this.servidorWS = function () {
         let cli = this;
@@ -84,10 +80,6 @@ function ClienteWS() {
             tablero.mostrarTablero(false);
             console.log("El Usuario " + res.nick + " ha abandonado la partida " + res.codigo);
             iu.mostrarModal("El Usuario " + res.nick + " ha abandonado la partida ");
-        });
-        this.socket.on("partidaPausada", function(res){
-            console.log("El usuario " + res.nick + " ha pausado la partida." + res.codigo);
-            iu.mostrarModal("El usuario " + res.nick + " ha pausado la partida.");
         });
         this.socket.on("barcoColocado", function (res) {
             //Pintar gris cuando colocamos
