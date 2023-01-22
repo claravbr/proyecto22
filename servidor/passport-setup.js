@@ -1,6 +1,7 @@
 const passport=require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const TwitterStrategy = require('@superfaceai/passport-twitter-oauth2').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -28,3 +29,11 @@ passport.use(new TwitterStrategy({
   }, function(token, tokenSecret, profile, done) {
       return done(null, profile);
   }));
+
+  passport.use(new GitHubStrategy({
+    clientID: "e15309c585ac3b8f2f4a",
+    clientSecret: "fd090b357ce9a871054dd8a8fad97482009b5d9b",
+    callbackURL: "http://localhost:3000/auth/github/callback"
+    }, function(accessToken, refreshToken, profile, done) {
+        return done(null, profile);
+    }));

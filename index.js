@@ -38,8 +38,8 @@ app.get("/", function(request,response){
   response.send(contenido);
 });
 
+//GOOGLE
 app.get("/auth/google",passport.authenticate('google', { scope: ['profile','email'] }));
-
 
 app.get('/google/callback', 
   passport.authenticate('google', { failureRedirect: '/fallo' }),
@@ -48,14 +48,26 @@ app.get('/google/callback',
     res.redirect('/good');
 });
 
+//TWITTER
 app.get("/auth/twitter",passport.authenticate('twitter', {scope: ['tweet.read', 'tweet.write', 'users.read']}));
 
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/fallo' }),
   function(req, res) {
     // Successful authentication, redirect.
-    res.redirect('/goodtwitter');
+    res.redirect('/goodusername');
   });
+
+// GITHUB
+app.get("/auth/github",passport.authenticate('github', {scope: ['user:email']}));
+
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/fallo' }),
+  function(req, res) {
+    // Successful authentication, redirect.
+    res.redirect('/goodusername');
+  });
+
 
 app.get("/good", function(request,response){
   var nick=request.user.emails[0].value;
@@ -66,7 +78,7 @@ app.get("/good", function(request,response){
   response.redirect('/');
 });
 
-app.get("/goodtwitter", function(request,response){
+app.get("/goodusername", function(request,response){
   var nick=request.user.username;
   if (nick){
     juego.agregarUsuario(nick);
