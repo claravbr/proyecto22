@@ -1,6 +1,6 @@
 const passport=require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-//const TwitterStrategy = require('passport-twitter').Strategy;
+const TwitterStrategy = require('@superfaceai/passport-twitter-oauth2').Strategy;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -20,10 +20,11 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-/*passport.use(new TwitterStrategy({
-  consumerKey: "TWpSZ3d5VEhDMFNlSXQwZGVoZEE6MTpjaQ",
-  consumerSecret: "vsxMjDJGsjRY8rb1UxQNfvoKqpIv9RZR_dOOybUfyM_3T9apj3",
-  callbackURL: "http://localhost:3000/twitter/callback"
+passport.use(new TwitterStrategy({
+  clientType: 'confidential',
+  clientID: "TWpSZ3d5VEhDMFNlSXQwZGVoZEE6MTpjaQ",
+  clientSecret: "vsxMjDJGsjRY8rb1UxQNfvoKqpIv9RZR_dOOybUfyM_3T9apj3",
+  callbackURL: "http://localhost:3000/auth/twitter/callback"
   }, function(token, tokenSecret, profile, done) {
       return done(null, profile);
-  }));*/
+  }));

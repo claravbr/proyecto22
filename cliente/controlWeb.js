@@ -15,7 +15,7 @@ function ControlWeb() {
         cadena = cadena + '<br><br>';
         cadena = cadena + '<p>Otros métodos de inicio de sesión:</p>';
         cadena = cadena + '<a href="/auth/google"><img src="cliente/img/icons8-logo-de-google-96.svg" alt="Google" width="50" height="50"></a>';
-        //cadena = cadena + '<a href="/auth/twitter"><img src="cliente/img/icons8-twitter-96.svg" alt="Twitter" width="50" height="50"></a>';
+        cadena = cadena + '<a href="/auth/twitter"><img src="cliente/img/icons8-twitter-96.svg" alt="Twitter" width="50" height="50"></a>';
         cadena = cadena + '<div id="nota"></div>';
         cadena = cadena + '</div></div>'
 
