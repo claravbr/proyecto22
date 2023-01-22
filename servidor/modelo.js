@@ -4,6 +4,7 @@ function Juego() {
 	this.partidas = [];
 	this.usuarios = {};  //array asociativo [clave][objeto]
 	this.cad = new cad.Cad(); // capa de acceso a datos
+	this.test = false;
 
 	this.agregarUsuario = function (nick) {
 		let res = { "nick": -1 };
@@ -139,6 +140,13 @@ function Juego() {
 			this.cad.insertarLog(log, callback)
 		}
 	}
+
+	if(!this.test){
+		this.cad.conectar(function(db){
+			console.log("Conectandose a Atlas")
+		})
+	}
+
 }
 
 function Usuario(nick, juego) {
@@ -249,6 +257,9 @@ function Partida(codigo, user) {
 		return res;
 	}
 
+	this.esInicial = function() {
+		return this.fase == "inicial";
+	}
 	this.esJugando = function () {
 		return this.fase == "jugando";
 	}
@@ -307,6 +318,15 @@ function Partida(codigo, user) {
 			}
 		}
 		return jugador;
+	}
+
+	this.estoy = function(nick){
+		let jugador = this.obtenerJugador(nick);
+		if (jugador){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	this.disparar = function (nick, x, y) {
