@@ -39,7 +39,7 @@ test('end-to-end', async ({ browser }) => {
   await pepepage.locator('div:nth-child(11)').first().click();
   await pepepage.getByText('Acorazado (Tam. 3H)').click();
   await pepepage.locator('div:nth-child(21)').first().click();
-  await pepepage.getByText('Submarino(Tam. 4H)').click();
+  await pepepage.getByText('Submarino (Tam. 4H)').click();
   await pepepage.locator('div:nth-child(31)').first().click();
 
   // -- LUIS --
@@ -48,7 +48,7 @@ test('end-to-end', async ({ browser }) => {
   await luispage.locator('div:nth-child(12)').first().click();
   await luispage.getByText('Destructor (Tam. 2H)').click();
   await luispage.locator('div:nth-child(42)').first().click();
-  await luispage.getByText('Submarino(Tam. 4H)').click();
+  await luispage.getByText('Submarino (Tam. 4H)').click();
   await luispage.locator('div:nth-child(65)').first().click();
   await luispage.getByText('Acorazado (Tam. 3H)').click();
   await luispage.locator('div:nth-child(82)').first().click();
